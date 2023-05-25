@@ -22,6 +22,7 @@ class RedactingFormatter(logging.Formatter):
         super(RedactingFormatter, self).__init__(self.FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
+        """formats log output"""
         return filter_datum(
             self.fields, self.REDACTION, super().format(record), self.SEPARATOR
         )
@@ -48,6 +49,7 @@ def filter_datum(
 
 
 def get_logger() -> logging.Logger:
+    """returns logger object"""
     log = logging.getLogger("user_data")
     log.setLevel(logging.INFO)
     log.propagate = False
