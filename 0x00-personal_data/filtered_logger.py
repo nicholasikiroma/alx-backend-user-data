@@ -42,7 +42,7 @@ def filter_datum(
     """
     pattern = "|".join(fields)
     return re.sub(
-        rf"({pattern})=.*?{re.escape(separator)}",
+        rf"({pattern})=.*?{separator}",
         rf"\1={redaction}{separator}",
         message,
     )
