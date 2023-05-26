@@ -17,7 +17,7 @@ class RedactingFormatter(logging.Formatter):
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
-    def __init__(self, fields):
+    def __init__(self, fields: List[str]):
         self.fields = fields
         super(RedactingFormatter, self).__init__(self.FORMAT)
 
@@ -42,7 +42,7 @@ def filter_datum(
     """
     pattern = "|".join(fields)
     return re.sub(
-        rf"({pattern})=.*?{separator}",
+        rf"({pattern})=.*?{re.escape(separator)}",
         rf"\1={redaction}{separator}",
         message,
     )
